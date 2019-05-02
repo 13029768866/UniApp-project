@@ -4,7 +4,10 @@
 		<!-- 轮播图 -->
 		<swiper class="carousel" circular="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" :indicator-dots="true"
 		 :autoplay="true" :interval="3000" :duration="1000">
-			<swiper-item v-for="carousel in carouselList">
+			<swiper-item 
+				v-for="carousel in carouselList"
+				:key ="carousel.id"
+			>
 				<image 
 					:src="carousel.image" 
 					class="carousel"></image>
@@ -61,6 +64,32 @@
 				
 			</video>
 		</view>
+		
+		<!-- 猜你喜欢 -->
+		<view class="page_module super_hot">
+			<view class="hot_title_wrapper">
+				<image class="hot_icon" src="../../static/icos/guess-u-like.png"></image>
+				<view class="hot_title">猜你喜欢</view>
+			</view>			
+		</view>
+		
+		<view class="page_module guess-u-like">
+			<view class="single-like-movie">
+				<image class="like-movie"></image>
+				<view class="movie-des">
+					<view class="movie-title">魏振江牛逼魏振江牛逼</view>
+					<view class="movie-info">123</view>
+					<view class="movie-info">魏振江</view>
+				</view>
+				<!-- 点赞功能 -->
+				<view class="movie-oper">
+					<image class="praise-ico" src="../../static/icos/praise.png"></image>
+					<view class="praise-me">
+						点赞
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 	
 	
@@ -73,7 +102,7 @@
 			return {
 				carouselList: [],	//	轮播图
 				hotSuperheroList: [],	// 热门板块	
-				hotSuperTrailer: []
+				hotSuperTrailer: []		// 热门预告
 			}
 		},
 		onLoad() {									
@@ -108,78 +137,5 @@
 </script>
 
 <style>
-	/*  隐藏滚动条 */
-	scroll-view ::-webkit-scrollbar{
-	       width: 0;
-	       height: 0;
-	       color: transparent;
-	    }
-	.carousel {
-		width: 100vw;
-		height: 440upx;
-	}
-	/* 热门板块 */
-	.super_hot{
-		margin-top: 12upx;
-		padding: 20upx;
-	}
-	
-	.hot_title_wrapper{
-		display: flex;
-		align-items: center;
-	}
-	.hot_title{
-		font-size: 20px;
-		margin-left: 20upx;
-		font-weight: 700;
-	}
-	.hot_icon{
-		width: 30upx;
-		height: 30upx;
-	}
-	.hot_produce{
-		width: 100%;
-	}
-	.hot_pro_wrapper{
-		display: flex;
-		margin-top: 20upx;
-	}
-	.hot_pro_item{
-		margin-left: 20upx;
-	}
-	.hot_pro_img{
-		width: 200upx;
-		height: 270upx;
-	}
-	.movie_name{
-		width: 200upx;
-		margin-top: 10upx;
-		font-size: 14px;
-	}
-	.movie_score_wrapper{
-		display: flex;
-		align-items: center;
-		margin-top: 6upx;
-	}
-	.star_icon{
-		width: 20upx;
-		height: 20upx;		
-	}
-	.movie_score{
-		font-size: 12px;
-		color: #ccc;
-		margin-left: 8upx;
-	}
-	/* 热门预告 */
-	.hot-movies{
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		padding: 0 20upx 20upx 20upx;
-	}
-	.hot-movie-single{
-		width: 350upx;
-		height: 220upx;
-		margin-top: 10upx;
-	}
+@import url(index.css)
 </style>
