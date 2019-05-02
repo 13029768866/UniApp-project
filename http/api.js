@@ -6,16 +6,15 @@ import http from './http.js'
  
 
 
-// 轮播图
+// 首页轮播图
 export const banner = (data) => {
     return http.request({
         url: '/index/carousel/list',
         method: 'POST', 
-        data,
-		// handle:true
+        data,		
     })
 }
-//	热门超英
+//	首页热门超英
 export const hot = (data) => {
 	return http.request({
 		url: '/index/movie/hot?type=superhero',
@@ -23,9 +22,17 @@ export const hot = (data) => {
 		data,	
 	});
 }
-
+// 首页热门预告
+export const trailer = (data) => {
+	return http.request({
+		url: '/index/movie/hot?type=trailer',
+		method: 'POST',
+		data,	
+	});
+}
 // 默认全部导出  import api from '@/http/api.js'
 export default {	
     banner,
-	hot
+	hot,
+	trailer
 }

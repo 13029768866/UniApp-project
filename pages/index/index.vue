@@ -42,7 +42,25 @@
 				</view>		
 			</scroll-view>
 		</view>
-		
+		<!-- 热门预告 -->
+		<view class="page_module super_hot">
+			<view class="hot_title_wrapper">
+				<image class="hot_icon" src="../../static/icos/interest.png"></image>
+				<view class="hot_title">热门预告</view>
+			</view>			
+		</view>
+		<view class="hot-movies page_module">
+			<video 
+				v-for="trailer in hotSuperTrailer"
+				:src="trailer.trailer"
+				:key = "trailer.id"
+				:poster=" trailer.poster"
+				class="hot-movie-single"
+				controls
+			>
+				
+			</video>
+		</view>
 	</view>
 	
 	
@@ -54,7 +72,8 @@
 		data() {
 			return {
 				carouselList: [],	//	轮播图
-				hotSuperheroList: []	// 热门板块	
+				hotSuperheroList: [],	// 热门板块	
+				hotSuperTrailer: []
 			}
 		},
 		onLoad() {									
@@ -64,6 +83,7 @@
 			init(){
 				this.getIndexBanner();
 				this.getIndexHot();
+				this.getIndexTrailer();
 			},
 			// 请求轮播图数据
 			async getIndexBanner(){
@@ -76,6 +96,12 @@
 				let res = await this.$api.hot({qq:'466481615'});
 				console.log(res);
 				this.hotSuperheroList = res.data.data;
+			},
+			//  请求热门预告
+			async getIndexTrailer(){
+				let res = await this.$api.trailer({qq:'466481615'});
+				console.log(res)
+				this.hotSuperTrailer = res.data.data;
 			}
 		}
 	}
@@ -144,5 +170,16 @@
 		color: #ccc;
 		margin-left: 8upx;
 	}
-	
+	/* 热门预告 */
+	.hot-movies{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 0 20upx 20upx 20upx;
+	}
+	.hot-movie-single{
+		width: 350upx;
+		height: 220upx;
+		margin-top: 10upx;
+	}
 </style>
