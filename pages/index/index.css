@@ -107,7 +107,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		border-left: dashed 4upx #808080;
+		border-left: dashed 4upx #ccc;
 	}
 	.praise-ico{
 		width: 40upx;
@@ -118,4 +118,9 @@
 		font-size: 28upx;
 		color: #feab2a;
 		align-self: center;
+	}
+	/* 点赞动画 */
+	.animation-opacity{
+	font-weight: bold;
+		opacity: 0;
 	}

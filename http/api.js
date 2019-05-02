@@ -30,9 +30,19 @@ export const trailer = (data) => {
 		data,	
 	});
 }
+
+// 首页猜你喜欢
+export const guess = (data) => {
+	return http.request({
+		url: '/index/guessULike',
+		method: 'POST',
+		data,	
+	});
+}
 // 默认全部导出  import api from '@/http/api.js'
 export default {	
     banner,
 	hot,
-	trailer
+	trailer,
+	guess
 }
