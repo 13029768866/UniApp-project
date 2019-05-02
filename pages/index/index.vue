@@ -57,51 +57,37 @@
 				hotSuperheroList: []	// 热门板块	
 			}
 		},
-		onLoad() {
-			//	获取生产环境地址
-			let serveUrl = env.serveUrl
-			// 请求轮播图数据
-			uni.request({
-				url:  serveUrl + '/index/carousel/list',
-				method: 'POST',
-				header: {
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				data: {
-					qq: '466481615'
-				},
-				success: (res) => {
-					if (res.data.status == 200 && res.data.data) {
-						this.carouselList = res.data.data;
-					}
-				}
-			});
-			
-			// 请求热门模块数据
-			uni.request({
-				url:  serveUrl + '/index/movie/hot?type=superhero',
-				method: 'POST',
-				header: {
-					'content-type': 'application/x-www-form-urlencoded'
-				},
-				data: {
-					qq: '466481615'
-				},
-				success: (res) => {
-					console.log(res.data)
-					if (res.data.status == 200 && res.data.data) {
-						this.hotSuperheroList = res.data.data;
-					}
-				}
-			});
+		onLoad() {									
+			this.init()			
 		},
 		methods: {
-
+			init(){
+				this.getIndexBanner();
+				this.getIndexHot();
+			},
+			// 请求轮播图数据
+			async getIndexBanner(){
+				let res = await this.$api.banner({qq:'466481615'});
+				console.log(res);
+				this.carouselList = res.data.data;
+			},
+			// 请求热门模块数据 
+			async getIndexHot(){
+				let res = await this.$api.hot({qq:'466481615'});
+				console.log(res);
+				this.hotSuperheroList = res.data.data;
+			}
 		}
 	}
 </script>
 
 <style>
+	/*  隐藏滚动条 */
+	scroll-view ::-webkit-scrollbar{
+	       width: 0;
+	       height: 0;
+	       color: transparent;
+	    }
 	.carousel {
 		width: 100vw;
 		height: 440upx;
