@@ -8,10 +8,11 @@
 			</view>
 			<input  
 			type="text" 
-			value="" 
+			v-model="val" 
 			placeholder="搜索预告"
 			maxlength="10"
-			focus
+			confirm-type="search"
+			@confirm="searchMe"
 			class="search_text"
 			/>
 		</view>
@@ -34,7 +35,11 @@
 	export default {
 		data() {
 			return {
-				searchList: []
+				searchList: [],
+				val: "",
+				keywords:"",
+				page: 1,		//当前页
+				totalPages: 1	// 总页数
 			};
 		},
 		onLoad() {
@@ -47,13 +52,20 @@
 			},
 			// 获取第一页数据
 			async getSearchList(){
-				 let res = await this.$api.search({qq:'466481615',keywords:'',page:'',pageSize:''})
+				 let res = await this.$api.search({qq:'466481615',keywords:this.keywords,page:this.page,pageSize:''})
 // 				let res =  this.$api.search({qq:'466481615',keywords:'',page:'',pageSize:''}).then((res) =>{
 // 					console.log(res)
 // 					this.searchList = res.data.data.rows
 // 				})
 				// console.log(res)
 				this.searchList = res.data.data.rows
+			},
+			searchMe(e){
+				// 获取搜索内容				
+				this.keywords = this.val;
+				console.log(this.keywords)
+				this.searchList = []
+				this.getSearchList()
 			}
 		}
 	}

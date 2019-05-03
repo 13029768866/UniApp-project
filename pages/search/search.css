@@ -31,14 +31,18 @@
 	background-color: #eaeaea;
 }
 /* 预告片列表 */
-.movie_list{
+.movie_list{		
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	padding: 100upx 20upx 0 20upx;
 }
 .movie_wrapper{
-	
+	margin-right: 50upx;
+	margin-bottom: 20upx;
+}
+.movie_wrapper:nth-child(3n){
+	margin-right: 0;
 }
 .poster{
 	width: 200upx;
