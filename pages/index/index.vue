@@ -1,5 +1,9 @@
 <template>
-	<wzj-pulldown-refresh>
+	<wzj-pulldown-refresh
+			ref="wzjPulldownRefresh"
+			:top = "0"	
+			@refresh="onPulldownReresh"
+	>
 		<view class="page">
 			<!-- 轮播图 -->
 			<swiper class="carousel" circular="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" :indicator-dots="true"
@@ -140,14 +144,7 @@
 		onUnload(){
 			// 页面关闭清楚动画
 			this.animationData = {}
-		},
-		// 下拉刷新
-		onPullDownRefresh(){
-			this.getGuessULike();
-			uni.showLoading({
-				mask: true,
-			})
-		}
+		}		
 		,
 		methods: {
 			init(){
@@ -155,6 +152,18 @@
 				this.getIndexHot();
 				this.getIndexTrailer();
 				this.getGuessULike()
+			},
+			// 下拉刷新
+			onPulldownReresh(){			
+				this.loadData('refresh');
+			},
+			loadData(type){					
+				setTimeout(() => {	
+					if(type === 'refresh'){
+						this.getGuessULike()
+						this.$refs.wzjPulldownRefresh && this.$refs.wzjPulldownRefresh.endPulldownRefresh();
+					}															
+				},1000)
 			},
 			// 请求轮播图数据
 			async getIndexBanner(){
