@@ -1,119 +1,124 @@
 <template>
-	
-	<view class="page">
-		<!-- 轮播图 -->
-		<swiper class="carousel" circular="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" :indicator-dots="true"
-		 :autoplay="true" :interval="3000" :duration="1000">
-			<swiper-item 
-				v-for="carousel in carouselList"
-				:key ="carousel.id"
-			>
-				<image 
-					:src="carousel.image" 
-					class="carousel"></image>
-			</swiper-item>
-		</swiper>
-		
-		<!-- 热门板块 -->
-		<view class="page_module super_hot">
-			<view class="hot_title_wrapper">
-				<image class="hot_icon" src="../../static/icos/hot.png"></image>
-				<view class="hot_title">热门超英</view>
-			</view>
-			<scroll-view scroll-x="true" class="page_module hot_produce">
-				<view class="hot_pro_wrapper">
-					<view 
-						class="hot_pro_item"
-						v-for="superhero in hotSuperheroList"
-						:key = 'superhero.id'
-					>
-						<image :src="superhero.cover" class="hot_pro_img"></image>
-						<view class="movie_name ell">
-							{{superhero.name}}
-						</view>
-						<view class="movie_score_wrapper">
-							<image src="../../static/icos/star-yellow.png" class="star_icon"></image>
-							<image src="../../static/icos/star-yellow.png" class="star_icon"></image>
-							<image src="../../static/icos/star-yellow.png" class="star_icon"></image>
-							<image src="../../static/icos/star-yellow.png" class="star_icon"></image>
-							<image src="../../static/icos/star-gray.png" class="star_icon"></image>
-							<view class="movie_score">
-								{{superhero.score}}
-							</view>
-						</view>
-					</view>					
-				</view>		
-			</scroll-view>
-		</view>
-		<!-- 热门预告 -->
-		<view class="page_module super_hot">
-			<view class="hot_title_wrapper">
-				<image class="hot_icon" src="../../static/icos/interest.png"></image>
-				<view class="hot_title">热门预告</view>
-			</view>			
-		</view>
-		<view class="hot-movies page_module">
-			<video 
-				v-for="trailer in hotSuperTrailer"
-				:src="trailer.trailer"
-				:key = "trailer.id"
-				:poster=" trailer.poster"
-				class="hot-movie-single"
-				controls
-			>
-				
-			</video>
-		</view>
-		
-		<!-- 猜你喜欢 -->
-		<view class="page_module super_hot">
-			<view class="hot_title_wrapper">
-				<image class="hot_icon" src="../../static/icos/guess-u-like.png"></image>
-				<view class="hot_title">猜你喜欢</view>
-			</view>			
-		</view>
-		
-		<view class="page_module guess-u-like">
-			<view 
-				class="single-like-movie"
-				v-for="(guessLike,gIdx) in guessLikeList"
-				:key = "guessLike.id"
-			>
-				<image 
-				:src="guessLike.cover"
-				class="like-movie"></image>
-				<view class="movie-des">
-					<view class="movie-title">{{guessLike.name}}</view>
-					<view class="movie-info">{{guessLike.basicInfo}}</view>
-					<view class="movie-info">{{guessLike.releaseDate}}</view>
-				</view>
-				<!-- 点赞功能 -->
-				<view 
-				:data-gIdx="gIdx"
-				class="movie-oper"
-				@click="prasieMe"
+	<wzj-pulldown-refresh>
+		<view class="page">
+			<!-- 轮播图 -->
+			<swiper class="carousel" circular="true" indicator-color="rgba(255,255,255,.6)" indicator-active-color="#fff" :indicator-dots="true"
+			 :autoplay="true" :interval="3000" :duration="1000">
+				<swiper-item 
+					v-for="carousel in carouselList"
+					:key ="carousel.id"
 				>
-					<image class="praise-ico" src="../../static/icos/praise.png"></image>
-					<view class="praise-me">
-						点赞
+					<image 
+						:src="carousel.image" 
+						class="carousel"></image>
+				</swiper-item>
+			</swiper>
+			
+			<!-- 热门板块 -->
+			<view class="page_module super_hot">
+				<view class="hot_title_wrapper">
+					<image class="hot_icon" src="../../static/icos/hot.png"></image>
+					<view class="hot_title">热门超英</view>
+				</view>
+				<scroll-view scroll-x="true" class="page_module hot_produce">
+					<view class="hot_pro_wrapper">
+						<view 
+							class="hot_pro_item"
+							v-for="superhero in hotSuperheroList"
+							:key = 'superhero.id'
+						>
+							<image :src="superhero.cover" class="hot_pro_img"></image>
+							<view class="movie_name ell">
+								{{superhero.name}}
+							</view>
+							<view class="movie_score_wrapper">
+								<image src="../../static/icos/star-yellow.png" class="star_icon"></image>
+								<image src="../../static/icos/star-yellow.png" class="star_icon"></image>
+								<image src="../../static/icos/star-yellow.png" class="star_icon"></image>
+								<image src="../../static/icos/star-yellow.png" class="star_icon"></image>
+								<image src="../../static/icos/star-gray.png" class="star_icon"></image>
+								<view class="movie_score">
+									{{superhero.score}}
+								</view>
+							</view>
+						</view>					
+					</view>		
+				</scroll-view>
+			</view>
+			<!-- 热门预告 -->
+			<view class="page_module super_hot">
+				<view class="hot_title_wrapper">
+					<image class="hot_icon" src="../../static/icos/interest.png"></image>
+					<view class="hot_title">热门预告</view>
+				</view>			
+			</view>
+			<view class="hot-movies page_module">
+				<video 
+					v-for="trailer in hotSuperTrailer"
+					:src="trailer.trailer"
+					:key = "trailer.id"
+					:poster=" trailer.poster"
+					class="hot-movie-single"
+					controls
+				>
+					
+				</video>
+			</view>
+			
+			<!-- 猜你喜欢 -->
+			<view class="page_module super_hot">
+				<view class="hot_title_wrapper">
+					<image class="hot_icon" src="../../static/icos/guess-u-like.png"></image>
+					<view class="hot_title">猜你喜欢</view>
+				</view>			
+			</view>
+			
+			<view class="page_module guess-u-like">
+				<view 
+					class="single-like-movie"
+					v-for="(guessLike,gIdx) in guessLikeList"
+					:key = "guessLike.id"
+				>
+					<image 
+					:src="guessLike.cover"
+					class="like-movie"></image>
+					<view class="movie-des">
+						<view class="movie-title">{{guessLike.name}}</view>
+						<view class="movie-info">{{guessLike.basicInfo}}</view>
+						<view class="movie-info">{{guessLike.releaseDate}}</view>
 					</view>
-					<!-- 点赞动画 -->
+					<!-- 点赞功能 -->
 					<view 
-					:animation="animationDataArr[gIdx]"
-					class="praise-me animation-opacity">
-						+1
+					:data-gIdx="gIdx"
+					class="movie-oper"
+					@click="prasieMe"
+					>
+						<image class="praise-ico" src="../../static/icos/praise.png"></image>
+						<view class="praise-me">
+							点赞
+						</view>
+						<!-- 点赞动画 -->
+						<view 
+						:animation="animationDataArr[gIdx]"
+						class="praise-me animation-opacity">
+							+1
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
-	</view>
+	</wzj-pulldown-refresh>
+	
 	
 	
 </template>
 
 <script>
-	import env from '../../app/env.js'
+	import wzjPulldownRefresh from '@/components/wzj-pulldown-refresh/wzj-pulldown-refresh.vue'
 	export default {
+		components:{
+			wzjPulldownRefresh
+		},
 		data() {
 			return {
 				carouselList: [],	//	轮播图
@@ -139,7 +144,9 @@
 		// 下拉刷新
 		onPullDownRefresh(){
 			this.getGuessULike();
-			uni.showLoading()
+			uni.showLoading({
+				mask: true,
+			})
 		}
 		,
 		methods: {
