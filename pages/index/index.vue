@@ -153,7 +153,7 @@
 				this.getIndexTrailer();
 				this.getGuessULike()
 			},
-			// 下拉刷新
+			// 通过方法的方式实现下拉刷新
 			onPulldownReresh(){			
 				this.loadData('refresh');
 			},

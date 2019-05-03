@@ -11,7 +11,9 @@
 		}
 	    ,{
             "path" : "pages/search/search",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "剑来影院搜索"
+			}
         }
         ,{
             "path" : "pages/mine/mine",

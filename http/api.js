@@ -39,10 +39,21 @@ export const guess = (data) => {
 		data,	
 	});
 }
+
+// 搜索页面
+export const search = (data) => {
+	return http.request({
+		url: '/search/list',
+		method: 'POST',
+		data,	
+	});
+}
+
 // 默认全部导出  import api from '@/http/api.js'
 export default {	
     banner,
 	hot,
 	trailer,
-	guess
+	guess,
+	search
 }
