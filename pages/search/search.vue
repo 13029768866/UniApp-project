@@ -39,7 +39,8 @@
 				val: "",
 				keywords:"",
 				page: 1,		//当前页
-				totalPages: 1	// 总页数
+				totalPages: 1,	// 总页数
+				pageSize: 12 	// 每页默认条数
 			};
 		},
 		onLoad() {
@@ -52,7 +53,7 @@
 			},
 			// 获取第一页数据
 			async getSearchList(){
-				 let res = await this.$api.search({qq:'466481615',keywords:this.keywords,page:this.page,pageSize:''})
+				 let res = await this.$api.search({qq:'466481615',keywords:this.keywords,page:this.page,pageSize:this.pageSize})
 // 				let res =  this.$api.search({qq:'466481615',keywords:'',page:'',pageSize:''}).then((res) =>{
 // 					console.log(res)
 // 					this.searchList = res.data.data.rows
@@ -63,8 +64,7 @@
 			searchMe(e){
 				// 获取搜索内容				
 				this.keywords = this.val;
-				console.log(this.keywords)
-				this.searchList = []
+				// console.log(this.keywords)								
 				this.getSearchList()
 			}
 		}
